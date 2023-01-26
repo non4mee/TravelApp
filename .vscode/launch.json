@@ -1,0 +1,36 @@
+{
+    // Используйте IntelliSense, чтобы узнать о возможных атрибутах.
+    // Наведите указатель мыши, чтобы просмотреть описания существующих атрибутов.
+    // Для получения дополнительной информации посетите: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+            {
+            "name": "Debug iOS",
+            "type": "reactnative",
+            "request": "launch",
+            "platform": "ios",
+            "target": "iPhone 13 Pro",
+            "sourceMaps": true,
+            "cwd": "${workspaceFolder}"
+            },
+            {
+            "name": "Debug Attach",
+            "type": "reactnative",
+            "request": "attach",
+            // "platform": "ios",
+            // "target": "iPhone 13 Pro",
+            "sourceMaps": true,
+            "cwd": "${workspaceFolder}"
+            },
+            {
+            "name": "Debug Device iOS",
+            "type": "reactnative",
+            "request": "launch",
+            "platform": "ios",
+            "target": "device",
+            "runArguments": ["--device"],
+            "sourceMaps": true,
+            "cwd": "${workspaceFolder}"
+            }
+    ]
+}
