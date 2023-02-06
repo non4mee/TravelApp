@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, TextInput, Image, Text } from 'react-native';
 import platform from '../../helpers/platform'
+import ButtonPicker from '../molecules/ButtonPicker'
 
 function CustomInput({
   styleInput,
@@ -15,6 +16,7 @@ function CustomInput({
   styleSub,
   icon,
   password,
+  input,
   ...rest
 }) {
   const [text, setText] = useState(_value)
@@ -53,6 +55,13 @@ function CustomInput({
             source={icon}
             resizeMode="contain"
           />}
+        {input && (
+          input && (
+            <ButtonPicker
+              icon={require('../../img/arrow_up_done.png')}
+            />
+          )
+        )}
       </View>
     </View>
   )
@@ -80,7 +89,8 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
     position: 'absolute',
-    right: 0
+    right: 0,
+    marginHorizontal: 16
   }
 })
 

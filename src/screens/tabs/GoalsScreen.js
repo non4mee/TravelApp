@@ -1,9 +1,9 @@
 import React from 'react';
-import { 
-  StyleSheet, 
-  View, 
-  Text, 
-  TouchableOpacity, 
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
   Image,
   FlatList
 } from 'react-native';
@@ -38,11 +38,11 @@ function GoalsScreen({ navigation }) {
   ]
   return (
     <View style={styles.container}>
-      <View style={styles.header}> 
+      <View style={styles.header}>
         <Text style={styles.title}>[LOGO]</Text>
-        <TouchableOpacity style={styles.btnDots} onPress={() => {}}> 
-          <Image 
-            source={require('../../img/dots.png')} 
+        <TouchableOpacity style={styles.btnDots} onPress={() => {}}>
+          <Image
+            source={require('../../img/dots.png')}
             style={styles.icon}
             resizeMode="contain"
           />
