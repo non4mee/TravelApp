@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
-import { View, Button, Text, ActivityIndicator, Alert } from 'react-native';
+import { View, Text, Button, Modal, StyleSheet, ActivityIndicator, Alert } from 'react-native';
 import { CardField, useStripe } from '@stripe/stripe-react-native';
 
-const StripePaymentScreen = () => {
+const StripePaymentScreen = ({ navigation }) => {
   const { confirmPayment } = useStripe();
+  const [modalVisible, setModalVisible] = useState(false);
   const [cardDetails, setCardDetails] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [balance, setBalance] = useState(100); // Пример начального баланса
+  const amount = 5000; // Example: 50.00 USD
 
   const fetchPaymentIntent = async () => {
     const response = await fetch('https://server.com/create-payment-intent', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ amount: 5000 }), // Example: 50.00 USD
+      body: JSON.stringify({ amount }),
     });
     const { clientSecret } = await response.json();
     return clientSecret;
@@ -35,6 +38,8 @@ const StripePaymentScreen = () => {
         Alert.alert('Payment failed', error.message);
       } else if (paymentIntent) {
         Alert.alert('Payment successful', `Payment ID: ${paymentIntent.id}`);
+        setBalance(balance - amount / 100); // Обновляем баланс
+        navigation.navigate('Balance', { balance: balance - amount / 100 }); // Переход на экран баланса
       }
     } catch (err) {
       Alert.alert('Payment error', err.message);
@@ -44,8 +49,8 @@ const StripePaymentScreen = () => {
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', padding: 20 }}>
-      <Text style={{ fontSize: 18, marginBottom: 10 }}>Enter card details</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Stripe Payment</Text>
       <CardField
         postalCodeEnabled={false}
         onCardChange={setCardDetails}
@@ -60,5 +65,17 @@ const StripePaymentScreen = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 24,
+    marginBottom: 20,
+  },
+});
 
 export default StripePaymentScreen;
